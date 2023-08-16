@@ -1,7 +1,9 @@
-package com.sesi.natacao.domain;
-
+package com.sesi.natacao.domain.infantil;
 
 import java.time.LocalDate;
+
+import com.sesi.natacao.domain.Nivel;
+import com.sesi.natacao.domain.Turno;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,27 +19,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Table(name = "clientes")
 @Entity
+@Table(name = "infantil")
+@Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter @Setter
 @EqualsAndHashCode(of = "id")
-public class Cliente {
+public class Infantil {
     
-    public Cliente(DadosCadastroCliente dados) {
-        this.nome = dados.nome();
-        this.dataInscricao = dados.dataInscricao();
-        this.dataNascimento = dados.dataNascimento();
-        this.nivel = dados.nivel();
-        this.turno = dados.turno();
-        this.observacao = dados.observacao();
-        this.ativo = true;
-    }
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String nome;
-    @Column(name = "data_inscricao")
+    @Column(name= "data_inscricao")
     private LocalDate dataInscricao;
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
@@ -46,7 +39,21 @@ public class Cliente {
     @Enumerated(EnumType.STRING)
     private Turno turno;
     private String observacao;
-    private boolean ativo;
+    private String responsavel;
+    private Boolean ativo;
+
+
+    public Infantil(DadosCadastroInfantil dados) {
+        this.nome = dados.nome();
+        this.dataInscricao = dados.dataInscricao();
+        this.dataNascimento = dados.dataNascimento();
+        this.nivel = dados.nivel();
+        this.turno = dados.turno();
+        this.observacao = dados.observacao();
+        this.responsavel = dados.responsavel();
+        this.ativo = true;
+    }
+    
 
     public void excluir() {
         this.ativo = false;
@@ -56,7 +63,7 @@ public class Cliente {
         this.ativo = true;
     }
 
-    public void atualizar(DadosAtualizaCliente dados) {
+    public void atualizar(DadosAtualizaInfantil dados) {
         if(dados.nome()!= null) {
             this.nome = dados.nome();
         }
@@ -74,6 +81,9 @@ public class Cliente {
         }
         if(dados.observacao() != null) {
             this.observacao = dados.observacao();
+        }
+        if(dados.responsavel() != null) {
+            this.responsavel = dados.responsavel();
         }
     }
 }

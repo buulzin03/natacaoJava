@@ -3,6 +3,7 @@ package com.sesi.natacao.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sesi.natacao.domain.Cliente;
 import com.sesi.natacao.domain.DadosAtualizaCliente;
 import com.sesi.natacao.domain.DadosCadastroCliente;
+import com.sesi.natacao.domain.DadosListaCliente;
 import com.sesi.natacao.repository.ClienteRepository;
 
 import jakarta.transaction.Transactional;
@@ -34,17 +36,17 @@ public class ClienteController {
     private ClienteRepository repository;
 
     @GetMapping
-    public ResponseEntity<Page<Cliente>> listar(@PageableDefault(sort = "dataInscricao") Pageable paginacao) {
-        Page<Cliente> clientes = repository.findAllByAtivoTrue(paginacao);
+    public ResponseEntity<Page<DadosListaCliente>> listar(@PageableDefault(sort = "dataInscricao") Pageable paginacao) {
+        Page<DadosListaCliente> clientes = repository.findAllByAtivoTrue(paginacao).map(DadosListaCliente::new);
 
+       
         return ResponseEntity.ok().body(clientes);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity pegarUnico(@PathVariable int id) {
-        Cliente cliente = repository.findById(id).get();
-
-        return ResponseEntity.ok().body(cliente);
+        DadosListaCliente dados = new DadosListaCliente(repository.findById(id).get());
+        return ResponseEntity.ok().body(dados);
     }
 
     @PostMapping
