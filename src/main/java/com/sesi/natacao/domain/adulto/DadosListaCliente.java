@@ -1,7 +1,10 @@
-package com.sesi.natacao.domain;
+package com.sesi.natacao.domain.adulto;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+
+import com.sesi.natacao.domain.Nivel;
+import com.sesi.natacao.domain.Turno;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

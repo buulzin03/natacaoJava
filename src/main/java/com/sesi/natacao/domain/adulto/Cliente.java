@@ -1,7 +1,10 @@
-package com.sesi.natacao.domain;
+package com.sesi.natacao.domain.adulto;
 
 
 import java.time.LocalDate;
+
+import com.sesi.natacao.domain.Nivel;
+import com.sesi.natacao.domain.Turno;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

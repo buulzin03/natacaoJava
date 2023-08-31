@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sesi.natacao.domain.Cliente;
-import com.sesi.natacao.domain.DadosAtualizaCliente;
-import com.sesi.natacao.domain.DadosCadastroCliente;
-import com.sesi.natacao.domain.DadosListaCliente;
+import com.sesi.natacao.domain.adulto.Cliente;
+import com.sesi.natacao.domain.adulto.DadosAtualizaCliente;
+import com.sesi.natacao.domain.adulto.DadosCadastroCliente;
+import com.sesi.natacao.domain.adulto.DadosListaCliente;
 import com.sesi.natacao.repository.ClienteRepository;
 
 import jakarta.transaction.Transactional;
@@ -56,7 +56,7 @@ public class ClienteController {
         
         repository.save(cliente);
 
-        return new ResponseEntity<Cliente>(cliente, HttpStatus.CREATED);
+        return new ResponseEntity<Cliente>(cliente , HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
